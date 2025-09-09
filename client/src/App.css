@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0rem;
+  text-align: center;  font-family: "Montserrat", sans-serif;
+  background-color: #191717;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+header{
+  font-size: 1.2rem;
+
+  padding: 1.1rem 2.5rem 1.1rem 2.5rem ;
+}
+
+.home{
+  background-image: url(../public/homeimg.png);
+  height: 89vh;
+  background-position: center;
+  background-size: cover;
+  min-width: 100%;
+ display: flex;
+  justify-content: center;
+        transition: transform 0.1s ease-out;
+z-index: 1;
+position: relative;
+
+}
+
+.home h1{
+  font-size: 11rem;
+   font-family: "Bebas Neue", sans-serif;
+}
+.home h1 span{
+  color: #CF36E0;
+}
+.paralax{
+   z-index: 2;
+    background-repeat: no-repeat;
+    width: 100%;
+    bottom: 10vh;
+    position: relative;
+}
+
+.bthome{
+  
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  font-size: 2.2rem;
+width: 20%;
+ background: -webkit-linear-gradient(90deg, #ff6c04,#ce34e5);/* Chrome 10-25, Safari 5.1-6 */                          background: linear-gradient(90deg, #ff6c04,#ce34e5);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */                                             
+}
+
+.boutonr{
+  background: #FF6C04;
+background: linear-gradient(90deg,rgba(255, 108, 4, 0.95) 0%, rgba(207, 53, 222, 1) 100%);
+color: white;
+font-weight: 500;
+font-size: 1.2rem;
+width: 100%;
+
+}
