@@ -8,7 +8,7 @@ import { rootLoader } from "./loaders/rootLoader";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 import HomePage from "./pages/Home";
 import Game from "./pages/game.jsx";
-
+import Test from "./Test.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -37,13 +37,9 @@ export const router = createBrowserRouter([
           </UserNotConnected>
         ),
       },
-        {
+      {
         path: "/game",
-        element: (
-         
-            <Game />
-         
-        ),
+        element: <Test />,
       },
     ],
   },

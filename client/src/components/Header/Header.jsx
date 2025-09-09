@@ -52,6 +52,7 @@ export default function Header() {
         <a className="border-1 pt-1 pb-1 ps-5 pe-5 rounded-4xl hover:bg-gray-100 hover:text-black hover:font-semibold">
           GAMES
         </a>
+
         <a className="border-1 pt-1 pb-1 ps-5 pe-5 rounded-4xl hover:bg-gray-100 hover:text-black hover:font-semibold">
           FAVORITE
         </a>
