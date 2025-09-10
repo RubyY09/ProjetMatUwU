@@ -1,9 +1,12 @@
+import Test from "../Test";
 
 export default function Home() {
 
   
   return (
-    
+    <div>
+
+   
     <section  className="home  flex-col ps-8 text-start  ">
 
         <h2 className="text-zinc-50 text-2xl"> <span className="font-bold ">+10 000</span> UTILISATEURS PAR JOUR</h2>
@@ -14,7 +17,7 @@ export default function Home() {
         src="/home.js" 
           
       />
-    
-    </section>
+   
+    </section> <Test /> </div>
   );
 }

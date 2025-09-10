@@ -10,6 +10,11 @@
   background-color: #191717;
 }
 
+
+.BN{
+    font-family: "Bebas Neue", sans-serif;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -99,4 +104,31 @@ font-weight: 500;
 font-size: 1.2rem;
 width: 100%;
 
+}
+.boutoncontour {
+  position: relative;
+
+  font-size: 2rem;
+
+  border-radius: 100px; /* coins arrondis du bouton */
+  cursor: pointer;
+  overflow: hidden; /* pour que le pseudo-élément ne déborde pas */
+  z-index: 1;
+    box-shadow: 0 4px 15px rgba(255, 136, 0, 0.3);
+}
+
+.boutoncontour::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  padding: 4px; /* épaisseur de la "bordure" */
+  border-radius: 100px; /* même arrondi */
+  background: linear-gradient(90deg, rgba(255,108,4,0.95), rgba(207,53,222,1));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
 }

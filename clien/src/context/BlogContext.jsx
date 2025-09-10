@@ -37,7 +37,7 @@ export function BlogProvider({ children }) {
   };
 
   return (
-    <BlogContext.Provider value={{ blogs, addBlog, games }}>
+    <BlogContext.Provider value={{ blogs, addBlog, games, loading }}>
       {children}
     </BlogContext.Provider>
   );
