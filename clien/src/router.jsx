@@ -7,8 +7,9 @@ import Login from "./pages/Forms/Login";
 import { rootLoader } from "./loaders/rootLoader";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 import HomePage from "./pages/Home";
-
+import Detail from "./pages/GameDetail.jsx";
 import Test from "./Test.jsx";
+import Catalogue from "./Catalogue.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -37,10 +38,21 @@ export const router = createBrowserRouter([
           </UserNotConnected>
         ),
       },
-  
+      {
+        path: "/game/:id",
+        element: (
+          <UserNotConnected>
+            <Detail />
+          </UserNotConnected>
+        ),
+      },
       {
         path: "/test",
         element: <Test />,
+      },
+      {
+        path: "/games",
+        element: <Catalogue />,
       },
     ],
   },

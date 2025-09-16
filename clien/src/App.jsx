@@ -23,8 +23,6 @@ function App() {
               isCentered ? "flex items-center justify-center" : ""
             }`}
           >
-           
-           
             <Outlet />
           </main>
         </BlogProvider>
