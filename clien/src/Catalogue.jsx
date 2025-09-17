@@ -10,16 +10,15 @@ export default function Catalogue() {
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [currentApiPage, setCurrentApiPage] = useState(1);
-
-  // États pour les filtres
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isFiltering, setIsFiltering] = useState(false);
-
   const loadingRef = useRef(false);
 
-  // Charger les genres depuis l'API RAWG
+  // Nouvel état pour gérer l'ouverture/fermeture du menu sur mobile
+  const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
+
   const loadGenres = useCallback(async () => {
     try {
       const response = await fetch(
@@ -34,14 +33,11 @@ export default function Catalogue() {
 
   const loadMoreGames = useCallback(async () => {
     if (loadingRef.current || !hasMore || loadingMore || isFiltering) return;
-
     loadingRef.current = true;
     setLoadingMore(true);
 
     try {
       const nextPage = currentApiPage + 1;
-
-      // Construire l'URL avec les filtres actuels
       let apiUrl = `https://api.rawg.io/api/games?key=49e293944c8e42c69921316ec1e98b46&page=${nextPage}&page_size=40`;
 
       if (selectedGenres.length > 0) {
@@ -58,7 +54,6 @@ export default function Catalogue() {
       if (data.results && data.results.length > 0) {
         setAllGames((prev) => [...prev, ...data.results]);
         setCurrentApiPage(nextPage);
-
         if (!data.next) {
           setHasMore(false);
         }
@@ -80,7 +75,6 @@ export default function Catalogue() {
     isFiltering,
   ]);
 
-  // Recharger les jeux avec les nouveaux filtres
   const reloadGamesWithFilters = useCallback(async () => {
     setIsFiltering(true);
     setAllGames([]);
@@ -115,16 +109,13 @@ export default function Catalogue() {
   useEffect(() => {
     const handleScroll = () => {
       if (loadingRef.current || !hasMore || isFiltering) return;
-
       const scrollTop = document.documentElement.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight;
       const clientHeight = document.documentElement.clientHeight;
-
       if (scrollTop + clientHeight >= scrollHeight * 0.8) {
         loadMoreGames();
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [loadMoreGames, hasMore, isFiltering]);
@@ -139,16 +130,13 @@ export default function Catalogue() {
     loadGenres();
   }, [loadGenres]);
 
-  // Recharger quand les filtres changent
   useEffect(() => {
     if (selectedGenres.length > 0 || searchTerm) {
       const timer = setTimeout(() => {
         reloadGamesWithFilters();
-      }, 300); // Debounce pour éviter trop d'appels API
-
+      }, 300);
       return () => clearTimeout(timer);
     } else if (games?.results) {
-      // Si aucun filtre, revenir aux jeux originaux
       setAllGames(games.results);
       setCurrentApiPage(1);
       setHasMore(true);
@@ -165,12 +153,9 @@ export default function Catalogue() {
       const newSelection = prev.includes(genreId)
         ? prev.filter((id) => id !== genreId)
         : [...prev, genreId];
-
-      // Scroll vers le haut quand on change les filtres
       setTimeout(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 100);
-
       return newSelection;
     });
   };
@@ -199,11 +184,11 @@ export default function Catalogue() {
   });
 
   return (
-    <div className="p-10 w-full mx-auto flex flex-col items-center">
+    <div className="p-4 sm:p-10 w-full mx-auto flex flex-col items-center">
       {/* Options de tri */}
-      <div className="flex gap-4 mb-8 flex-wrap justify-center">
+      <div className="flex gap-2 sm:gap-4 mb-4 sm:mb-8 flex-wrap justify-center w-full max-w-7xl">
         <button
-          className={`px-4 py-2 rounded transition-colors ${
+          className={`px-3 py-1 text-sm sm:px-4 sm:py-2 rounded transition-colors ${
             sortOption === "newest"
               ? "bg-[#CF35DE] text-gray-100"
               : "bg-[#332842] text-gray-100 hover:bg-gray-600"
@@ -213,7 +198,7 @@ export default function Catalogue() {
           Newest
         </button>
         <button
-          className={`px-4 py-2 rounded transition-colors ${
+          className={`px-3 py-1 text-sm sm:px-4 sm:py-2 rounded transition-colors ${
             sortOption === "oldest"
               ? "bg-[#CF35DE] text-gray-100"
               : "bg-[#332842] text-gray-100 hover:bg-gray-600"
@@ -223,7 +208,7 @@ export default function Catalogue() {
           Oldest
         </button>
         <button
-          className={`px-4 py-2 rounded transition-colors ${
+          className={`px-3 py-1 text-sm sm:px-4 sm:py-2 rounded transition-colors ${
             sortOption === "most-popular"
               ? "bg-[#CF35DE] text-gray-100"
               : "bg-[#332842] text-gray-100 hover:bg-gray-600"
@@ -233,7 +218,7 @@ export default function Catalogue() {
           Most popular
         </button>
         <button
-          className={`px-4 py-2 rounded transition-colors ${
+          className={`px-3 py-1 text-sm sm:px-4 sm:py-2 rounded transition-colors ${
             sortOption === "least-popular"
               ? "bg-[#CF35DE] text-gray-100"
               : "bg-[#332842] text-gray-100 hover:bg-gray-600"
@@ -243,7 +228,7 @@ export default function Catalogue() {
           Least popular
         </button>
         <button
-          className={`px-4 py-2 rounded transition-colors ${
+          className={`px-3 py-1 text-sm sm:px-4 sm:py-2 rounded transition-colors ${
             sortOption === "alphabetical"
               ? "bg-[#CF35DE] text-gray-100"
               : "bg-[#332842] text-gray-100 hover:bg-gray-600"
@@ -254,38 +239,35 @@ export default function Catalogue() {
         </button>
       </div>
 
-      {/* Section des filtres */}
-      <div className="w-full max-w-7xl mb-8">
-        {/* Filtres par genre */}
-        <div className="mb-4 text-center">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <h3 className="text-lg font-semibold text-gray-200">
-              Filter by Genre:
-            </h3>
-            {hasActiveFilters && (
-              <button
-                onClick={clearAllFilters}
-                className="text-red-400 hover:text-red-300 text-sm flex items-center gap-1"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-                Clear all filters
-              </button>
-            )}
-          </div>
-
-          <div className="flex flex-wrap gap-2 justify-center">
+      {/* SECTION FILTRES MOBILES (MENU DÉROULANT) */}
+      <div className="sm:hidden w-full max-w-7xl mb-8 text-center">
+        <button
+          onClick={() => setIsFilterMenuOpen(!isFilterMenuOpen)}
+          className="w-full px-4 py-2 bg-[#332842] text-gray-50 rounded flex justify-between items-center"
+        >
+          Filter by Genre
+          <svg
+            className={`w-4 h-4 transition-transform duration-300 ${
+              isFilterMenuOpen ? "rotate-180" : ""
+            }`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+        <div
+          className={`transition-all duration-300 ease-in-out ${
+            isFilterMenuOpen ? "h-auto opacity-100" : "h-0 opacity-0 overflow-hidden"
+          }`}
+        >
+          <div className="flex flex-wrap gap-2 justify-center mt-4">
             {genres.map((genre) => (
               <button
                 key={genre.id}
@@ -303,10 +285,79 @@ export default function Catalogue() {
               </button>
             ))}
           </div>
+          {hasActiveFilters && (
+            <button
+              onClick={clearAllFilters}
+              className="text-red-400 hover:text-red-300 text-sm flex items-center gap-1 mt-4 mx-auto"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+              Clear all filters
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Indicateur de chargement pour les filtres */}
+      {/* SECTION FILTRES DESKTOP (TOUJOURS VISIBLES) */}
+      <div className="hidden sm:block w-full max-w-7xl mb-8 text-center">
+        <div className="flex items-center justify-center gap-4 mb-4">
+          <h3 className="text-lg font-semibold text-gray-200">
+            Filter by Genre:
+          </h3>
+          {hasActiveFilters && (
+            <button
+              onClick={clearAllFilters}
+              className="text-red-400 hover:text-red-300 text-sm flex items-center gap-1"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+              Clear all filters
+            </button>
+          )}
+        </div>
+        <div className="flex flex-wrap gap-2 justify-center">
+          {genres.map((genre) => (
+            <button
+              key={genre.id}
+              onClick={() => toggleGenre(genre.id)}
+              className={`px-3 py-2 rounded-full text-sm transition-colors ${
+                selectedGenres.includes(genre.id)
+                  ? "bg-[#CF35DE] text-white"
+                  : "bg-[#332842] text-gray-300 hover:bg-gray-600"
+              }`}
+            >
+              {genre.name}
+              {selectedGenres.includes(genre.id) && (
+                <span className="ml-1">×</span>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Le reste du code est inchangé */}
       {isFiltering && (
         <div className="mb-8 flex items-center justify-center">
           <div className="flex items-center space-x-2 text-[#CF35DE]">
@@ -316,7 +367,6 @@ export default function Catalogue() {
         </div>
       )}
 
-      {/* Grille des jeux */}
       {sortedGames.length === 0 && !isFiltering ? (
         <div className="text-center py-12">
           <p className="text-xl text-gray-400 mb-2">No games found</p>
@@ -333,7 +383,7 @@ export default function Catalogue() {
           )}
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-7xl">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 w-full max-w-7xl">
           {sortedGames.map((game, index) => (
             <GameCard key={`${game.id}-${index}`} game={game} />
           ))}
@@ -376,7 +426,7 @@ function ScrollToTopButton() {
     };
 
     window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeVisibility("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });

@@ -54,6 +54,7 @@ export const router = createBrowserRouter([
         path: "/games",
         element: <Catalogue />,
       },
+      
     ],
   },
 ]);

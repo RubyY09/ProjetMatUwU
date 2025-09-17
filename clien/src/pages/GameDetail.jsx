@@ -9,7 +9,7 @@ export default function GameDetails() {
   const [loading, setLoading] = useState(true);
   const [similarGames, setSimilarGames] = useState([]);
 
-  // Récupération du jeu
+  // Récupération du jeux
   useEffect(() => {
     async function fetchGame() {
       try {
