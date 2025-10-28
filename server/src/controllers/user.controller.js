@@ -20,7 +20,7 @@ export const register = async (req, res) => {
     const existingTempUserPseudo = await TempUser.findOne({ username });
 
     if (existingUserMail || existingUserPseudo) {
-      return res.status(400).json({ message: "Déjà inscrit" });
+      return res.status(400).json({ message: "Already registered" });
     } else if (existingTempUserMail || existingTempUserPseudo) {
       return res.status(400).json({ message: "Vérifiez vos email" });
     }
@@ -67,12 +67,12 @@ export const login = async (req, res) => {
   if (!user) {
     return res
       .status(400)
-      .json({ message: "Email ou nom d'utilisateur incorrect" });
+      .json({ message: "incorrect mail or pseudo" });
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    return res.status(400).json({ message: "Mot de passe incorrect" });
+    return res.status(400).json({ message: "Incorrect password " });
   }
   // 3 - ajout des données
 

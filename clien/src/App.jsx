@@ -5,7 +5,8 @@ import Header from "./components/Header/Header";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./context/AuthContext";
 import { BlogProvider } from "./context/BlogContext";
-import Home from "./pages/Home";
+import { FavoritesProvider } from "./context/FavoritesContext"; 
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const location = useLocation();
@@ -17,14 +18,17 @@ function App() {
     <div className="h-full flex flex-col">
       <AuthProvider>
         <BlogProvider>
-          <Header />
-          <main
-            className={`flex-1 ${
-              isCentered ? "flex items-center justify-center" : ""
-            }`}
-          >
-            <Outlet />
-          </main>
+          <FavoritesProvider> 
+            <Header />
+            <main
+              className={`flex-1 ${
+                isCentered ? "flex items-center justify-center" : ""
+              }`}
+            >
+              <Outlet />
+            </main>
+            <Footer />
+          </FavoritesProvider>
         </BlogProvider>
       </AuthProvider>
       <Toaster />

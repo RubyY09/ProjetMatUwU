@@ -1,6 +1,3 @@
-// import { BASE_URL } from "../utils/url";
-
-// change url
 const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
 export async function signUp(values) {
@@ -15,12 +12,16 @@ export async function signUp(values) {
     const newUserMessage = await response.json();
     return newUserMessage;
   } catch (error) {
-    console.log(error);
+    console.error("Erreur signUp:", error);
+    return { message: "Erreur réseau" };
   }
 }
 
 export async function signIn(values) {
   try {
+    console.log(" URL de connexion:", `${BASE_URL}user/login`);
+    console.log(" Données envoyées:", values);
+
     const response = await fetch(`${BASE_URL}user/login`, {
       method: "POST",
       body: JSON.stringify(values),
@@ -29,10 +30,28 @@ export async function signIn(values) {
       },
       credentials: "include",
     });
+
+    console.log(" Status de la réponse:", response.status);
+
+    // Gestion des erreurs HTTP
+    if (!response.ok) {
+      const error = await response.json();
+      console.error(" Erreur serveur:", error);
+      return { 
+        user: null, 
+        message: error.message || "Erreur de connexion" 
+      };
+    }
+
     const userConnected = await response.json();
+    console.log(" Utilisateur connecté:", userConnected);
     return userConnected;
   } catch (error) {
-    console.log(error);
+    console.error(" Erreur réseau:", error);
+    return { 
+      user: null, 
+      message: "Impossible de contacter le serveur" 
+    };
   }
 }
 
@@ -48,13 +67,18 @@ export async function getCurrentUser() {
       return null;
     }
   } catch (error) {
-    console.log(error);
+    console.error("Erreur getCurrentUser:", error);
+    return null;
   }
 }
 
 export async function signout() {
-  await fetch(`${BASE_URL}user/deleteToken`, {
-    method: "DELETE",
-    credentials: "include",
-  });
+  try {
+    await fetch(`${BASE_URL}user/deleteToken`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+  } catch (error) {
+    console.error("Erreur signout:", error);
+  }
 }

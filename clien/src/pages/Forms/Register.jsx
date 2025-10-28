@@ -31,23 +31,23 @@ export default function Register() {
   };
 
   const schema = yup.object({
-    username: yup.string().required("Ce champ est obligatoire"),
+    username: yup.string().required("the field is required"),
     email: yup
       .string()
       .email()
-      .required("Le champ est obligatoire")
-      .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g, "Format email non valide"),
+      .required("the field is required")
+      .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g, "format email incorrect"),
     password: yup
       .string()
       .required("Le mot de passe est obligatoire")
-      .min(5, "Trop court")
-      .max(10, "trop long"),
+      .min(5, "to short ")
+      .max(10, "to long "),
     confirmPassword: yup
       .string()
-      .required("La confirmation de mot de passe est obligatoire")
+      .required("this field is required")
       .oneOf(
         [yup.ref("password"), ""],
-        "Les mots de passe ne correspondent pas"
+        "the password confirmation does not match"
       ),
     rgpd: yup
       .boolean()

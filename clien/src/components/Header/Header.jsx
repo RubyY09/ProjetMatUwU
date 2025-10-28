@@ -66,7 +66,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white shadow-md">
+    <header className=" shadow-md">
       {/* Desktop Header */}
       <div className="hidden xl:flex p-3 flex-row justify-between items-center ">
         <NavLink to="/" className="flex items-center gap-15 text-zinc-50">
@@ -159,18 +159,12 @@ export default function Header() {
           {userConnected ? (
             <>
               <NavLink
-                to="/blog"
+                to="/profile"
                 className="bg-gray-100 pt-1 pb-1 ps-5 pe-5 rounded-4xl hover:font-semibold"
               >
-                Blog
+                PROFIL
               </NavLink>
-              <NavLink
-                to="/login"
-                onClick={logout}
-                className="bg-gray-100 pt-1 pb-1 ps-5 pe-5 rounded-4xl hover:font-semibold"
-              >
-                Disconnection
-              </NavLink>
+             
             </>
           ) : (
             <>

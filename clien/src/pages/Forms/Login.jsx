@@ -17,8 +17,8 @@ export default function Login() {
   };
 
   const schema = yup.object({
-    data: yup.string().required("Ce champ est obligatoire"),
-    password: yup.string().required("Le mot de passe est obligatoire"),
+    data: yup.string().required("This field is required"),
+    password: yup.string().required("This password is required"),
   });
 
   const {
@@ -37,7 +37,7 @@ export default function Login() {
       const userConnected = await signIn(values);
 
       if (userConnected.user) {
-        toast.success("Bien connecté");
+        toast.success("Successfully logged in!");
         login(userConnected.user);
         navigate("/");
         reset(defaultValues);
@@ -52,7 +52,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center min-h-[89vh] p-4 md:p-0 gap-10 ">
       <div className="hidden md:flex w-full md:w-3/4 relative">
-        <img src="/public/hollow.png" alt="" className="w-full h-full object-cover rounded-3xl" />
+        <img src="/hollow.png" alt="" className="w-full h-full object-cover rounded-3xl" />
         <div className="absolute bottom-5 left-5 text-white">
           <h2 className="text-xl font-bold text-gray-100 text-start">
             Welcome Back!

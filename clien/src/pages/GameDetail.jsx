@@ -1,13 +1,24 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Heart } from "lucide-react"; 
+import toast from "react-hot-toast";
 import "../App.css";
 import Comments from "../components/comment";
+import { useFavorites } from "../context/FavoritesContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function GameDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
   const [similarGames, setSimilarGames] = useState([]);
+  
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const { userConnected } = useAuth(); // ✅ CHANGÉ: user → userConnected
+  const isGameFavorite = game ? isFavorite(game.id) : false;
+
+  console.log("👤 Utilisateur connecté:", userConnected); // Debug
 
   // Récupération du jeux
   useEffect(() => {
@@ -50,6 +61,30 @@ export default function GameDetails() {
     fetchSimilarGames();
   }, [game]);
 
+  const handleFavoriteClick = () => {
+    if (!game) return;
+    
+    // ✅ CHANGÉ: user → userConnected
+    if (!userConnected) {
+      toast.error("Vous devez être connecté pour ajouter des favoris");
+      navigate("/login");
+      return;
+    }
+    
+    if (isGameFavorite) {
+      removeFavorite(game.id);
+      toast.success(`${game.name} removed from favorites`);
+    } else {
+      addFavorite({
+        id: game.id,
+        name: game.name,
+        background_image: game.background_image,
+        genres: game.genres
+      });
+      toast.success(`${game.name} added to favorites`);
+    }
+  };
+
   if (loading) return <p className="text-center text-xl">Chargement...</p>;
   if (!game) return <p className="text-center text-xl">Jeu introuvable.</p>;
 
@@ -57,7 +92,26 @@ export default function GameDetails() {
     <div className="mb-20">
       <div className="text-gray-50 flex flex-col items-start mt-30 mx-15">
         <div>
-          <h1 className="text-9xl f mb-6 BN text-start">{game.name}</h1>
+          <div className="flex items-start justify-between mb-6">
+            <h1 className="text-9xl f BN text-start">{game.name}</h1>
+            <button
+              onClick={handleFavoriteClick}
+              className={`mt-4 p-4 rounded-full transition-all ${
+                isGameFavorite 
+                  ? 'bg-red-500 hover:bg-red-600' 
+                  : 'bg-gray-700 hover:bg-gray-600'
+              }`}
+              aria-label={isGameFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
+              title={!userConnected ? "Connectez-vous pour ajouter aux favoris" : ""}
+            >
+              <Heart 
+                size={32} 
+                fill={isGameFavorite ? "white" : "none"}
+                stroke="white"
+              />
+            </button>
+          </div>
+          
           <p className="uppercase bg-[#501c4c] text-[#BBA9BB] text-2xl px-5 py-2 w-75 rounded-3xl mb-6">
             {game.genres.map((g) => g.name).join(", ")}
           </p>

@@ -10,6 +10,7 @@ import HomePage from "./pages/Home";
 import Detail from "./pages/GameDetail.jsx";
 import Test from "./Test.jsx";
 import Catalogue from "./Catalogue.jsx";
+import Profile from "./pages/profile.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -38,12 +39,20 @@ export const router = createBrowserRouter([
           </UserNotConnected>
         ),
       },
+         {
+        path: "/profile",
+        element: (
+          
+            <Profile />
+         
+        ),
+      },
       {
         path: "/game/:id",
         element: (
-          <UserNotConnected>
+          
             <Detail />
-          </UserNotConnected>
+          
         ),
       },
       {
