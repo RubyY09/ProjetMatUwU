@@ -44,6 +44,6 @@ app.use("/", routes);
 // Connexion à la DB et démarrage du serveur
 app.listen(PORT, () => {
   console.log(` Serveur démarré sur le port ${PORT}`);
-  console.log(` Frontend autorisé: ${process.env.CLIENT_URL}`);
+  console.log(` Frontend autorisé: ${process.env.CLIENT_URL,process.env.DEPLOY_FRONT_URL}`);
   connectDB();
 });
