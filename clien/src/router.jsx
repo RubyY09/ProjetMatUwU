@@ -6,7 +6,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Login from "./pages/Forms/Login";
 import { rootLoader } from "./loaders/rootLoader";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
-import HomePage from "./pages/Home";
+import HomePage from "./pages/home";
 import Detail from "./pages/GameDetail.jsx";
 import Test from "./Test.jsx";
 import Catalogue from "./Catalogue.jsx";

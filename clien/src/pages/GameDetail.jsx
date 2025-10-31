@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Heart } from "lucide-react"; 
+import { Heart, CheckCircle } from "lucide-react"; 
 import toast from "react-hot-toast";
 import "../App.css";
 import Comments from "../components/comment";
@@ -13,12 +13,21 @@ export default function GameDetails() {
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
   const [similarGames, setSimilarGames] = useState([]);
+  const [isCompleted, setIsCompleted] = useState(false);
   
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
-  const { userConnected } = useAuth(); // ✅ CHANGÉ: user → userConnected
+  const { userConnected } = useAuth();
   const isGameFavorite = game ? isFavorite(game.id) : false;
 
-  console.log("👤 Utilisateur connecté:", userConnected); // Debug
+  console.log("👤 Utilisateur connecté:", userConnected);
+
+  // Charger l'état "terminé" depuis localStorage
+  useEffect(() => {
+    if (userConnected && game) {
+      const completedGames = JSON.parse(localStorage.getItem(`completed_${userConnected.id}`) || '[]');
+      setIsCompleted(completedGames.includes(game.id));
+    }
+  }, [userConnected, game]);
 
   // Récupération du jeux
   useEffect(() => {
@@ -64,7 +73,6 @@ export default function GameDetails() {
   const handleFavoriteClick = () => {
     if (!game) return;
     
-    // ✅ CHANGÉ: user → userConnected
     if (!userConnected) {
       toast.error("Vous devez être connecté pour ajouter des favoris");
       navigate("/login");
@@ -85,6 +93,30 @@ export default function GameDetails() {
     }
   };
 
+  const handleCompletedClick = () => {
+    if (!game) return;
+    
+    if (!userConnected) {
+      toast.error("Vous devez être connecté pour marquer un jeu comme terminé");
+      navigate("/login");
+      return;
+    }
+    
+    const completedGames = JSON.parse(localStorage.getItem(`completed_${userConnected.id}`) || '[]');
+    
+    if (isCompleted) {
+      const updatedCompleted = completedGames.filter(gameId => gameId !== game.id);
+      localStorage.setItem(`completed_${userConnected.id}`, JSON.stringify(updatedCompleted));
+      setIsCompleted(false);
+      toast.success(`${game.name} retiré des jeux terminés`);
+    } else {
+      const updatedCompleted = [...completedGames, game.id];
+      localStorage.setItem(`completed_${userConnected.id}`, JSON.stringify(updatedCompleted));
+      setIsCompleted(true);
+      toast.success(`${game.name} marqué comme terminé`);
+    }
+  };
+
   if (loading) return <p className="text-center text-xl">Chargement...</p>;
   if (!game) return <p className="text-center text-xl">Jeu introuvable.</p>;
 
@@ -94,22 +126,43 @@ export default function GameDetails() {
         <div>
           <div className="flex items-start justify-between mb-6">
             <h1 className="text-9xl f BN text-start">{game.name}</h1>
-            <button
-              onClick={handleFavoriteClick}
-              className={`mt-4 p-4 rounded-full transition-all ${
-                isGameFavorite 
-                  ? 'bg-red-500 hover:bg-red-600' 
-                  : 'bg-gray-700 hover:bg-gray-600'
-              }`}
-              aria-label={isGameFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
-              title={!userConnected ? "Connectez-vous pour ajouter aux favoris" : ""}
-            >
-              <Heart 
-                size={32} 
-                fill={isGameFavorite ? "white" : "none"}
-                stroke="white"
-              />
-            </button>
+            <div className="flex gap-3">
+              {/* Bouton Terminé */}
+              <button
+                onClick={handleCompletedClick}
+                className={`mt-4 p-4 rounded-full transition-all ${
+                  isCompleted 
+                    ? 'bg-green-500 hover:bg-green-600' 
+                    : 'bg-gray-700 hover:bg-gray-600'
+                }`}
+                aria-label={isCompleted ? "Retirer des jeux terminés" : "Marquer comme terminé"}
+                title={!userConnected ? "Connectez-vous pour marquer comme terminé" : ""}
+              >
+                <CheckCircle 
+                  size={32} 
+                  fill={isCompleted ? "white" : "none"}
+                  stroke="white"
+                />
+              </button>
+
+              {/* Bouton Favori */}
+              <button
+                onClick={handleFavoriteClick}
+                className={`mt-4 p-4 rounded-full transition-all ${
+                  isGameFavorite 
+                    ? 'bg-red-500 hover:bg-red-600' 
+                    : 'bg-gray-700 hover:bg-gray-600'
+                }`}
+                aria-label={isGameFavorite ? "Retirer des favoris" : "add to favorites"}
+                title={!userConnected ? "Log in to add to favorites" : ""}
+              >
+                <Heart 
+                  size={32} 
+                  fill={isGameFavorite ? "white" : "none"}
+                  stroke="white"
+                />
+              </button>
+            </div>
           </div>
           
           <p className="uppercase bg-[#501c4c] text-[#BBA9BB] text-2xl px-5 py-2 w-75 rounded-3xl mb-6">
