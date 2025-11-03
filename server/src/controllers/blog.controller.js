@@ -6,6 +6,7 @@ export const getGames = async (req, res) => {
       `https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page_size=12`
     );
     const data = await response.json();
+    console.log(" Data fetched from RAWG:", data);
     res.json(data.results);
   } catch (error) {
     res.status(500).json({ error: error.message });
