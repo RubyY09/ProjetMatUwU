@@ -17,10 +17,10 @@ export default function Test() {
         <div className="flex   ">
           <div className="w-115 ">
             <div className="flex items-center  gap-4">
-              <h2 className="text-purple-500 text-9xl BN ">EN</h2>
+              <h2 className="text-purple-500 text-9xl BN ">IN</h2>
             </div>
             <h2 className="text-gray-50 text-9xl BN  flex items-center">
-              COURS
+              PROGRESS
             </h2>
           </div>
 
