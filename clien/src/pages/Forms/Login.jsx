@@ -52,7 +52,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center min-h-[89vh] p-4 md:p-0 gap-10 ">
       <div className="hidden md:flex w-full md:w-3/4 relative">
-        <img src="/hollow.png" alt="" className="w-full h-full object-cover rounded-3xl" />
+        <img src="/hollow.png" alt="hollow knight background" className="w-full h-full object-cover rounded-3xl" />
         <div className="absolute bottom-5 left-5 text-white">
           <h2 className="text-xl font-bold text-gray-100 text-start">
             Welcome Back!

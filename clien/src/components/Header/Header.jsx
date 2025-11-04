@@ -71,7 +71,7 @@ export default function Header() {
       <div className="hidden xl:flex p-3 flex-row justify-between items-center ">
         <NavLink to="/" className="flex items-center gap-15 text-zinc-50">
           <img src="public/logo.png" alt="logo du site" className="w-21" />
-          <a className="border-1 pt-1 pb-1 ps-5 pe-5 rounded-4xl hover:bg-gray-100 hover:text-black hover:font-semibold">
+          <a alt="home"className="border-1 pt-1 pb-1 ps-5 pe-5 rounded-4xl hover:bg-gray-100 hover:text-black hover:font-semibold" >
             HOME
           </a>
           <NavLink

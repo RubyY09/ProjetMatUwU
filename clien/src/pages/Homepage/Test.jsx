@@ -61,7 +61,7 @@ export default function Test() {
           <div className="w-115  ">
             <div className="flex items-center  gap-4">
               <h2 className="text-purple-500 text-9xl BN ">TOP</h2>
-              <img className="h-[9vh]" src="public/flamme.png" alt="" />
+              <img className="h-[9vh]" src="public/flamme.png" alt="flamme" />
             </div>
             <h2 className="text-gray-50 text-9xl BN  flex items-center">
               GAMES
@@ -121,7 +121,7 @@ export default function Test() {
          <Link to="/games">
   <button 
     className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8" 
-    aria-label="Voir plus de jeux de votre bibliothèque"
+    aria-label="see more games in your library"
     type="button"
   >
     SEE MORE
