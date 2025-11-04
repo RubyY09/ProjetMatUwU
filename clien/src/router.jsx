@@ -8,8 +8,8 @@ import { rootLoader } from "./loaders/rootLoader";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 import HomePage from "./pages/home";
 import Detail from "./pages/GameDetail.jsx";
-import Test from "./Test.jsx";
-import Catalogue from "./Catalogue.jsx";
+import Test from "./pages/Homepage/Test.jsx";
+import Catalogue from "./pages/Catalogue.jsx";
 import Profile from "./pages/profile.jsx";
 
 export const router = createBrowserRouter([

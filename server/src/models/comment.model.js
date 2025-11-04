@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const commentSchema = new mongoose.Schema(
   {
     username: { type: String, required: true },
-    gameId: { type: String, required: true }, // comme tu prends l’ID de RAWG
+    gameId: { type: String, required: true }, 
     message: { type: String, required: true },
   },
   { timestamps: true }

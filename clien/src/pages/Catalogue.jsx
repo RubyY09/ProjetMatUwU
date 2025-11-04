@@ -1,7 +1,7 @@
-import GameCard from "./components/Common/GameCard";
-import { useBlog } from "./context/BlogContext";
+import GameCard from "../components/Common/GameCard";
+import { useBlog } from "../context/BlogContext";
 import { useState, useEffect, useCallback, useRef } from "react";
-import "./App.css";
+import "../App.css";
 
 export default function Catalogue() {
   const { games, loading } = useBlog();

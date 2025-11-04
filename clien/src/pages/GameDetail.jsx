@@ -74,7 +74,7 @@ export default function GameDetails() {
     if (!game) return;
     
     if (!userConnected) {
-      toast.error("Vous devez être connecté pour ajouter des favoris");
+      toast.error("You must be logged in to add favorites");
       navigate("/login");
       return;
     }
@@ -97,7 +97,7 @@ export default function GameDetails() {
     if (!game) return;
     
     if (!userConnected) {
-      toast.error("Vous devez être connecté pour marquer un jeu comme terminé");
+      toast.error("You must be logged in to mark a game as finished.");
       navigate("/login");
       return;
     }

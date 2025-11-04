@@ -1,7 +1,7 @@
-import GameCard from "./components/Common/GameCard";
-import { useBlog } from "./context/BlogContext";
-import "./App.css";
-import Games from "./Catalogue";
+import GameCard from "../../components/Common/GameCard";
+import { useBlog } from "../../context/BlogContext";
+import "../../App";
+import Games from "../Catalogue";
 import { Link } from "react-router-dom";
 
 export default function Test() {

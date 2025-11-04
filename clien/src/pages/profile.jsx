@@ -52,7 +52,7 @@ export default function Profile() {
       <div className="min-h-screen flex items-center justify-center text-gray-50">
         <div className="text-center">
           <User size={80} className="mx-auto mb-4 text-gray-600" />
-          <p className="text-2xl text-gray-400 mb-4">Vous devez être connecté</p>
+          <p className="text-2xl text-gray-400 mb-4">you must connected</p>
           <Link 
             to="/login" 
             className="boutonr text-white px-6 py-3 rounded-xl inline-block"

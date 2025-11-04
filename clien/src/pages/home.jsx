@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import Test from "../Test";
+import Test from "./Homepage/Test";
 
 export default function Home() {
   const [offsetY, setOffsetY] = useState(0);

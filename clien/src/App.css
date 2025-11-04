@@ -116,11 +116,7 @@ header {
 
 .boutonr {
   background: #ff6c04;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 108, 4, 0.95) 0%,
-    rgba(207, 53, 222, 1) 100%
-  );
+  background: linear-gradient( 90deg, rgba(255, 108, 4, 0.95) 0%,rgba(207, 53, 222, 1) 100% );
   color: white;
   font-weight: 500;
   font-size: 1.2rem;

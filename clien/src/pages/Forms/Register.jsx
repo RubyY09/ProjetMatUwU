@@ -51,7 +51,7 @@ export default function Register() {
       ),
     rgpd: yup
       .boolean()
-      .oneOf([true], "Vous devez accepter les termes et conditions"),
+      .oneOf([true], "You must accept the terms and conditions"),
   });
 
   const {
