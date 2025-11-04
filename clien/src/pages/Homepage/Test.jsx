@@ -2,6 +2,7 @@ import GameCard from "../../components/Common/GameCard";
 import { useBlog } from "../../context/BlogContext";
 import "../../App";
 import Games from "../Catalogue";
+
 import { Link } from "react-router-dom";
 
 export default function Test() {
@@ -17,10 +18,10 @@ export default function Test() {
         <div className="flex   ">
           <div className="w-115 ">
             <div className="flex items-center  gap-4">
-              <h2 className="text-purple-500 text-9xl BN ">IN</h2>
+              <h2 className="text-purple-500 text-9xl BN ">EN</h2>
             </div>
             <h2 className="text-gray-50 text-9xl BN  flex items-center">
-              PROGRESS
+              COURS
             </h2>
           </div>
 
@@ -39,20 +40,15 @@ export default function Test() {
         </div>
         <div className="flex justify-end gap-4 mb-8 ">
           <Link to="/games">
-  <button 
-    className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8" 
-    aria-label="Voir plus de jeux de votre bibliothèque"
-    type="button"
-  >
-    SEE MORE
-  </button>
-</Link>
-
+            <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8">
+              SEE MORE
+            </button>
+          </Link>
 
           <Link to="/games">
-            <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-5 pe-5"  aria-label="Voir plus de jeux de votre bibliothèque">
+            <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-5 pe-5">
               &gt;
-            </button >
+            </button>
           </Link>
         </div>
       </div>
@@ -61,12 +57,13 @@ export default function Test() {
           <div className="w-115  ">
             <div className="flex items-center  gap-4">
               <h2 className="text-purple-500 text-9xl BN ">TOP</h2>
-              <img className="h-[9vh]" src="public/flamme.png" alt="flamme" />
+              <img className="h-[9vh]" src="../../../public/flamme.png" alt="" />
             </div>
             <h2 className="text-gray-50 text-9xl BN  flex items-center">
               GAMES
             </h2>
           </div>
+          
 
           <div className="flex gap-15">
             {games.results
@@ -78,19 +75,14 @@ export default function Test() {
           </div>
         </div>
         <div className="flex justify-end gap-4 mb-8 ">
-        <Link to="/games">
-  <button 
-    className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8" 
-    aria-label="Voir plus de jeux de votre bibliothèque"
-    type="button"
-  >
-    SEE MORE
-  </button>
-</Link>
-
+          <Link to="/games">
+            <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8">
+              SEE MORE
+            </button>
+          </Link>
 
           <Link to="/games">
-            <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-5 pe-5"  aria-label="Voir plus de jeux de votre bibliothèque">
+            <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-5 pe-5">
               &gt;
             </button>
           </Link>
@@ -118,18 +110,14 @@ export default function Test() {
           </div>
         </div>
         <div className="flex justify-end gap-4 mb-8 ">
-         <Link to="/games">
-  <button 
-    className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8" 
-    aria-label="see more games in your library"
-    type="button"
-  >
-    SEE MORE
-  </button>
-</Link>
+          <Link to="/games">
+            <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8">
+              SEE MORE
+            </button>
+          </Link>
 
           <Link to="/games">
-            <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-5 pe-5"  aria-label="Voir plus de jeux de votre bibliothèque">
+            <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-5 pe-5">
               &gt;
             </button>
           </Link>
