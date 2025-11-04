@@ -75,7 +75,7 @@ export default function Header() {
             HOME
           </a>
           <NavLink
-            to="/games"
+            to="/games" alt="games"
             className="border-1 pt-1 pb-1 ps-5 pe-5 rounded-4xl hover:bg-gray-100 hover:text-black hover:font-semibold"
           >
             GAMES
@@ -196,7 +196,7 @@ export default function Header() {
             HOME
           </NavLink>
           <NavLink
-            to="/games"
+            to="/games" alt="games"
             className="border-1 pt-1 pb-1 ps-3 pe-3 rounded-4xl hover:bg-gray-100 hover:text-black hover:font-semibold text-sm"
           >
             GAMES
@@ -361,7 +361,7 @@ export default function Header() {
               HOME
             </NavLink>
             <NavLink
-              to="/games"
+              to="/games" alt="games"
               className="border-1 pt-1 pb-1 ps-4 pe-4 rounded-4xl hover:bg-gray-100 hover:text-black hover:font-semibold text-sm"
             >
               GAMES
@@ -510,7 +510,7 @@ export default function Header() {
                 HOME
               </NavLink>
               <NavLink
-                to="/games"
+                to="/games" alt="games"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block w-full text-center border-1 pt-2 pb-2 rounded-4xl hover:bg-gray-100 hover:text-black hover:font-semibold text-zinc-50"
               >
