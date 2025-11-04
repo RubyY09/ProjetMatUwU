@@ -39,14 +39,15 @@ export default function Test() {
         </div>
         <div className="flex justify-end gap-4 mb-8 ">
           <Link to="/games">
-           <button 
-  className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8"
-  aria-label="Voir plus de jeux de votre bibliothèque"
->
-  SEE MORE
-</button>
+  <button 
+    className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8" 
+    aria-label="Voir plus de jeux de votre bibliothèque"
+    type="button"
+  >
+    SEE MORE
+  </button>
+</Link>
 
-          </Link>
 
           <Link to="/games">
             <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-5 pe-5"  aria-label="Voir plus de jeux de votre bibliothèque">
@@ -77,11 +78,16 @@ export default function Test() {
           </div>
         </div>
         <div className="flex justify-end gap-4 mb-8 ">
-          <Link to="/games">
-            <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8"  aria-label="Voir plus de jeux de votre bibliothèque">
-              SEE MORE
-            </button>
-          </Link>
+        <Link to="/games">
+  <button 
+    className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8" 
+    aria-label="Voir plus de jeux de votre bibliothèque"
+    type="button"
+  >
+    SEE MORE
+  </button>
+</Link>
+
 
           <Link to="/games">
             <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-5 pe-5"  aria-label="Voir plus de jeux de votre bibliothèque">
@@ -112,11 +118,15 @@ export default function Test() {
           </div>
         </div>
         <div className="flex justify-end gap-4 mb-8 ">
-          <Link to="/games">
-            <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8"  aria-label="Voir plus de jeux de votre bibliothèque">
-              SEE MORE
-            </button>
-          </Link>
+         <Link to="/games">
+  <button 
+    className="boutoncontour text-gray-50 pt-1 pb-1 ps-8 pe-8" 
+    aria-label="Voir plus de jeux de votre bibliothèque"
+    type="button"
+  >
+    SEE MORE
+  </button>
+</Link>
 
           <Link to="/games">
             <button className="boutoncontour text-gray-50 pt-1 pb-1 ps-5 pe-5"  aria-label="Voir plus de jeux de votre bibliothèque">
